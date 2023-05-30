@@ -13,8 +13,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('user')->get();
-        return view('home',compact('posts'));
+
+//         with N+1 query problem
+        $posts = Post::all();
+
+//         load later
+        $posts->load('user');
+//        with eager loading
+//        $posts = Post::with('user')->get();
+        return view('home', compact('posts'));
     }
 
     /**
