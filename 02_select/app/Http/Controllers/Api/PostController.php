@@ -18,6 +18,7 @@ class PostController extends Controller
             ->with('user:id,name,email')
             ->take(100)
             ->get();
+
         return response()->json(PostResource::collection($posts));
     }
 

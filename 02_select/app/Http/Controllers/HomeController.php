@@ -12,9 +12,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::select('id','user_id', 'title')
-            ->with('user:id,name')
-            ->get();
+        $posts = cache()->remember('posts', 60 * 60 * 24, fn () => Post::select('id', 'user_id', 'title')->with('user:id,name')->get());
 
         return view('home', compact('posts'));
     }

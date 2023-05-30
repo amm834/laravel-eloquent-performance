@@ -16,10 +16,10 @@ class SearchController extends Controller
             $query->where('title', 'like', "%$searchTerm%", function (Builder $query) use ($searchTerm) {
                 return $query->orWhere('body', 'like', "$searchTerm%");
             });
+
             return  $query;
         }
 
         return view('search');
     }
-
 }
